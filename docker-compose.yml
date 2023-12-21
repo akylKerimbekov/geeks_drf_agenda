@@ -1,0 +1,23 @@
+version: '3'
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: AGENDA_DB
+      POSTGRES_USER: AGENDA_USER
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+    secrets:
+      - db_password
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./secrets:/run/secrets
+    depends_on:
+      - db
+    secrets:
+      - db_password
+secrets:
+  db_password:
+    file: ./secrets/db_password.txt
