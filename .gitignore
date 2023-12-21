@@ -1,0 +1,9 @@
+.env
+.idea
+.venv
+db.sqlite3
+__pycache__
+.DS_Store
+secrets
+secrets/db_password
+secrets/db_password.txt
