@@ -5,9 +5,14 @@ services:
     environment:
       POSTGRES_DB: AGENDA_DB
       POSTGRES_USER: AGENDA_USER
-      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
-    secrets:
-      - db_password
+      POSTGRES_PASSWORD: agenda
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - cinematica
+
   web:
     build: .
     ports:
@@ -16,8 +21,9 @@ services:
       - ./secrets:/run/secrets
     depends_on:
       - db
-    secrets:
-      - db_password
-secrets:
-  db_password:
-    file: ./secrets/db_password.txt
+    networks:
+      - cinematica
+
+networks:
+  cinematica:
+    driver: bridge

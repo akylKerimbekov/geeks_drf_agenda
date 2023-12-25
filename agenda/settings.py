@@ -101,7 +101,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'AGENDA_DB',
         'USER': 'AGENDA_USER',
-        'PASSWORD': open('/run/secrets/db_password').read().strip(),
+        'PASSWORD': 'agenda',
         'HOST': 'db',
         'PORT': '5432',
     }
